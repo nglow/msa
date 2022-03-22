@@ -1,4 +1,4 @@
-package com.example.userservice;
+package com.example.msa.userservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
