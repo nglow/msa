@@ -5,6 +5,8 @@ import com.example.msa.ecommerce.userservice.domain.UserService;
 import com.example.msa.ecommerce.userservice.dto.UserCreateRequestDto;
 import com.example.msa.ecommerce.userservice.dto.UserCreateResponseDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -26,7 +28,8 @@ public class UserController {
     }
 
     @PostMapping("/users")
-    public UserCreateResponseDto createUser(@RequestBody UserCreateRequestDto requestDto) {
-        return userService.createUser(requestDto);
+    public ResponseEntity<UserCreateResponseDto> createUser(@RequestBody UserCreateRequestDto requestDto) {
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(userService.createUser(requestDto));
     }
 }
