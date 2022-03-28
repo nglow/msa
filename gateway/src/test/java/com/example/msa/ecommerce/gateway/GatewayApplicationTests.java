@@ -1,4 +1,4 @@
-package com.example.msa.gateway;
+package com.example.msa.ecommerce.gateway;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

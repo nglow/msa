@@ -1,38 +1,38 @@
-package com.example.msa.gateway.filter;
+package com.example.msa.ecommerce.gateway.filter;
+
 
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
-import org.springframework.cloud.gateway.filter.OrderedGatewayFilter;
 import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;
-import org.springframework.core.Ordered;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
 @Component
 @Slf4j
-public class LoggingFilter extends AbstractGatewayFilterFactory<LoggingFilter.Config> {
-
-    public LoggingFilter() {
+public class GlobalFilter extends AbstractGatewayFilterFactory<GlobalFilter.Config> {
+    public GlobalFilter() {
         super(Config.class);
     }
 
     @Override
     public GatewayFilter apply(Config config) {
-        return new OrderedGatewayFilter((exchange, chain) -> {
+        // Custom pre filter
+        return ((exchange, chain) -> {
             var request = exchange.getRequest();
             var response = exchange.getResponse();
 
-            log.info("Logging filter baseMessage: {}", config.getBaseMessage());
+            log.info("Global filter baseMessage: {}", config.getBaseMessage());
             if (config.isPreLogger())
-                log.info("Logging pre filter: request id -> {}", request.getId());
+                log.info("Global filter start: request id -> {}", request.getId());
 
+            // Custom post filter
             return chain.filter(exchange).then(Mono.fromRunnable(() -> {
                 if (config.isPostLogger())
-                    log.info("Logging post filter: response code -> {}", response.getStatusCode());
+                    log.info("Global filter end: response code -> {}", response.getStatusCode());
             }));
-        }, Ordered.LOWEST_PRECEDENCE);
+        });
     }
 
     @Getter

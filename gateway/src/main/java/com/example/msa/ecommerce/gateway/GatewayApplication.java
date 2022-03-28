@@ -1,4 +1,4 @@
-package com.example.msa.gateway;
+package com.example.msa.ecommerce.gateway;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,8 +1,5 @@
-package com.example.msa.gateway.filter;
+package com.example.msa.ecommerce.gateway.filter;
 
-
-import lombok.Getter;
-import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;
@@ -11,8 +8,9 @@ import reactor.core.publisher.Mono;
 
 @Component
 @Slf4j
-public class GlobalFilter extends AbstractGatewayFilterFactory<GlobalFilter.Config> {
-    public GlobalFilter() {
+public class CustomFilter extends AbstractGatewayFilterFactory<CustomFilter.Config> {
+
+    public CustomFilter() {
         super(Config.class);
     }
 
@@ -23,24 +21,16 @@ public class GlobalFilter extends AbstractGatewayFilterFactory<GlobalFilter.Conf
             var request = exchange.getRequest();
             var response = exchange.getResponse();
 
-            log.info("Global filter baseMessage: {}", config.getBaseMessage());
-            if (config.isPreLogger())
-                log.info("Global filter start: request id -> {}", request.getId());
+            log.info("Custom pre filter: request id -> {}", request.getId());
 
             // Custom post filter
             return chain.filter(exchange).then(Mono.fromRunnable(() -> {
-                if (config.isPostLogger())
-                    log.info("Global filter end: response code -> {}", response.getStatusCode());
+                log.info("Custom post filter: response code -> {}", response.getStatusCode());
             }));
         });
     }
 
-    @Getter
-    @Setter
     public static class Config {
         // Put the configuration properties
-        private String baseMessage;
-        private boolean preLogger;
-        private boolean postLogger;
     }
 }
