@@ -44,7 +44,7 @@ public class Order {
         instance.unitPrice = unitPrice;
         instance.userId = userId;
 
-        instance.totalPrice = instance.unitPrice * instance.getQuantity();
+        instance.totalPrice = instance.unitPrice * instance.quantity;
         instance.orderId = UUID.randomUUID().toString();
 
         return instance;
