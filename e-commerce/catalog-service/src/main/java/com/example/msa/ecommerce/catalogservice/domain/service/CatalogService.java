@@ -1,7 +1,7 @@
 package com.example.msa.ecommerce.catalogservice.domain.service;
 
-import com.example.msa.ecommerce.catalogservice.domain.persistence.Catalog;
 import com.example.msa.ecommerce.catalogservice.domain.persistence.CatalogRepository;
+import com.example.msa.ecommerce.catalogservice.dto.CatalogFindResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

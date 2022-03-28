@@ -1,15 +1,10 @@
-package com.example.msa.ecommerce.catalogservice.domain.service;
+package com.example.msa.ecommerce.catalogservice.dto;
 
 import com.example.msa.ecommerce.catalogservice.domain.persistence.Catalog;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.ColumnDefault;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import java.time.LocalDate;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)

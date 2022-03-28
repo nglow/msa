@@ -1,6 +1,6 @@
 package com.example.msa.ecommerce.catalogservice.web.controller;
 
-import com.example.msa.ecommerce.catalogservice.domain.service.CatalogFindResponseDto;
+import com.example.msa.ecommerce.catalogservice.dto.CatalogFindResponseDto;
 import com.example.msa.ecommerce.catalogservice.domain.service.CatalogService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
