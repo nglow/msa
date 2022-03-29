@@ -19,5 +19,12 @@ eureka:
   instance:
     instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
 
+logging.level:
+  com.example.msa.ecommerce.userservice: debug
+
 greeting:
   message: Welcome to the Simple E-Commerce
+
+token:
+  expiration_time: 864000000 # 10 days
+  secret: user_token

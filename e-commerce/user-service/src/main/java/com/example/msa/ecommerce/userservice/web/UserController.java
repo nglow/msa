@@ -1,10 +1,11 @@
 package com.example.msa.ecommerce.userservice.web;
 
-import com.example.msa.ecommerce.userservice.config.Greeting;
+import com.example.msa.ecommerce.userservice.web.config.Greeting;
 import com.example.msa.ecommerce.userservice.domain.UserService;
 import com.example.msa.ecommerce.userservice.dto.UserCreateRequestDto;
 import com.example.msa.ecommerce.userservice.dto.UserCreateResponseDto;
 import com.example.msa.ecommerce.userservice.dto.UserFindResponseDto;
+import com.example.msa.ecommerce.userservice.dto.UserSignInRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RestController
-@RequestMapping("/user-service")
+//@RequestMapping("/user-service")
 @RequiredArgsConstructor
 public class UserController {
 
@@ -48,4 +49,9 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(userService.findUserByUserId(userId));
     }
+
+    @PostMapping("/users/sign-in")
+    public void signIn(@RequestBody UserSignInRequestDto requestDto) {
+    }
+
 }

@@ -1,4 +1,4 @@
-package com.example.msa.ecommerce.userservice.config;
+package com.example.msa.ecommerce.userservice.web.config;
 
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;
