@@ -30,6 +30,7 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
     private final Environment environment;
     private final RestTemplate restTemplate;
+    private final OrderServiceClient orderService;
 
     public UserCreateResponseDto createUser(UserCreateRequestDto requestDto) {
         var userId = UUID.randomUUID().toString();
@@ -42,12 +43,14 @@ public class UserService {
     public UserFindResponseDto findUserByUserId(String userId) {
         var user = userRepository.findByUserId(userId)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        // Use REST Template
+//        var orderServiceUrl = String.format(Objects.requireNonNull(environment.getProperty("order_service.url")), userId);
+//        log.debug("orderServiceUrl = {}", orderServiceUrl);
+//        var ordersResponse = restTemplate.exchange(orderServiceUrl,
+//                HttpMethod.GET, null, new ParameterizedTypeReference<List<OrderResponseDto>>() {});
+//        var orders = ordersResponse.getBody();
 
-        var orderServiceUrl = String.format(Objects.requireNonNull(environment.getProperty("order_service.url")), userId);
-        log.debug("orderServiceUrl = {}", orderServiceUrl);
-        var ordersResponse = restTemplate.exchange(orderServiceUrl,
-                HttpMethod.GET, null, new ParameterizedTypeReference<List<OrderResponseDto>>() {});
-        var orders = ordersResponse.getBody();
+        var orders = orderService.findOrders(userId);
 
         return UserFindResponseDto.from(user, orders);
     }
