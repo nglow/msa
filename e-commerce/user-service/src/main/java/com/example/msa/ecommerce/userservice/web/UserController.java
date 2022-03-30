@@ -7,6 +7,7 @@ import com.example.msa.ecommerce.userservice.dto.UserCreateResponseDto;
 import com.example.msa.ecommerce.userservice.dto.UserFindResponseDto;
 import com.example.msa.ecommerce.userservice.dto.UserSignInRequestDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,10 +22,17 @@ public class UserController {
 
     private final Greeting greeting;
     private final UserService userService;
+    private final Environment environment;
 
     @GetMapping("/health-check")
-    public String status(HttpServletRequest request) {
-        return String.format("It's working in user service on port %s", request.getServerPort());
+    public String status() {
+        return String.format("It's working in user service on port(local.server.port)-%s, " +
+                        "on port(server.port)-%s, with token secret-%s, with token time-%s, with test - %s",
+                environment.getProperty("local.server.port"),
+                environment.getProperty("server.port"),
+                environment.getProperty("token.secret"),
+                environment.getProperty("token.expiration_time"),
+                environment.getProperty("token.test"));
     }
 
     @GetMapping("/welcome")

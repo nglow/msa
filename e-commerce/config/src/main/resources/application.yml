@@ -4,9 +4,28 @@ server:
 spring:
   application:
     name: config-server
+#  profiles:
+#    active: native
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: admin
+    password: admin
 
   cloud:
     config:
       server:
+#        native:
+#          search-locations: file://${user.home}/Projects/msa/e-commerce/config-repo
         git:
-          uri: file:///Users/bigth8/Projects/msa/e-commerce/config-repo # Use local repository
+#          uri: file:///Users/bigth8/Projects/msa/e-commerce/config-repo # Use local repository
+#          uri: file:///Users/bigth8/Projects/config-repo
+          uri: https://github.com/nglow/config-repo.git
+#          username:
+#          password:
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, busrefresh
