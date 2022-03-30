@@ -9,4 +9,4 @@ spring:
     config:
       server:
         git:
-          uri: file:///Users/bigth8/Projects/config-repo # Use local repository
+          uri: file:///Users/bigth8/Projects/msa/e-commerce/config-repo # Use local repository
