@@ -9,6 +9,7 @@ import com.example.msa.ecommerce.userservice.dto.UserSignInRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -46,13 +47,13 @@ public class UserController {
                 .body(userService.createUser(requestDto));
     }
 
-    @GetMapping("/users")
+    @GetMapping(value = "/users")
     public ResponseEntity<List<UserFindResponseDto>> findAllUsers() {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(userService.findAllUsers());
     }
 
-    @GetMapping("/users/{userId}")
+    @GetMapping(value = "/users/{userId}", produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<UserFindResponseDto> findByUserId(@PathVariable("userId") String userId) {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(userService.findUserByUserId(userId));
