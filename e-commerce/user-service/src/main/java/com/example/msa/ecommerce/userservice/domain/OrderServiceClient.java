@@ -12,4 +12,7 @@ public interface OrderServiceClient {
 
     @GetMapping("/order-service/users/{userId}/orders")
     List<OrderResponseDto> findOrders(@PathVariable("userId") String userId);
+
+    @GetMapping("/order-service/users/{userId}/orders-error")
+    List<OrderResponseDto> findOrdersError(@PathVariable("userId") String userId);
 }

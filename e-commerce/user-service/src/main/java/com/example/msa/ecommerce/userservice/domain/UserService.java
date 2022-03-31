@@ -6,10 +6,7 @@ import com.example.msa.ecommerce.userservice.dto.UserCreateResponseDto;
 import com.example.msa.ecommerce.userservice.dto.UserFindResponseDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.core.env.Environment;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -17,7 +14,6 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -50,7 +46,23 @@ public class UserService {
 //                HttpMethod.GET, null, new ParameterizedTypeReference<List<OrderResponseDto>>() {});
 //        var orders = ordersResponse.getBody();
 
-        var orders = orderService.findOrders(userId);
+        List<OrderResponseDto> orders;
+//        try {
+//            orders = orderService.findOrders(userId);
+//        } catch (FeignException exception) {
+//            log.error(exception.getMessage());
+//            throw exception;
+//        }
+
+//        try {
+//            orders = orderService.findOrderError(userId);
+//        } catch (FeignException exception) {
+//            log.error(exception.getMessage());
+//            throw exception;
+//        }
+
+        // Use error decoder
+        orders = orderService.findOrdersError(userId);
 
         return UserFindResponseDto.from(user, orders);
     }

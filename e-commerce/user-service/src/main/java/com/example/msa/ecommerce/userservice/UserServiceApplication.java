@@ -1,5 +1,8 @@
 package com.example.msa.ecommerce.userservice;
 
+import com.example.msa.ecommerce.userservice.domain.config.FeignErrorDecoder;
+import feign.Logger;
+import feign.codec.ErrorDecoder;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
@@ -22,6 +25,16 @@ public class UserServiceApplication {
     @LoadBalanced
     public RestTemplate getRestTemplate() {
         return new RestTemplate();
+    }
+
+    @Bean
+    public Logger.Level feignLoggerLevel() {
+        return Logger.Level.FULL;
+    }
+
+    @Bean
+    public ErrorDecoder feignErrorDecoder() {
+        return new FeignErrorDecoder();
     }
 
 }
